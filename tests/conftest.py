@@ -13,7 +13,10 @@ def setup(request):
     global driver
 
     options = webdriver.ChromeOptions()
-    options.add_experimental_option("detach", True)
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--headless=new")  # Optional: Run in headless mode
+    options.add_argument("--disable-gpu")
     file_path = os.path.join(os.getcwd(), "chromedriver")
     s = Service(file_path)
     driver = webdriver.Chrome(options=options, service=s)
