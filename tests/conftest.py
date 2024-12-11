@@ -1,8 +1,9 @@
+import os
+
 import allure
 from allure_commons.types import AttachmentType
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 import pytest
 from tests.base import Base
 
@@ -13,7 +14,8 @@ def setup(request):
 
     options = webdriver.ChromeOptions()
     options.add_experimental_option("detach", True)
-    s = Service(ChromeDriverManager().install())
+    file_path = os.path.join(os.getcwd(), "chromedriver")
+    s = Service(file_path)
     driver = webdriver.Chrome(options=options, service=s)
     driver.implicitly_wait(10)
     # driver.get("https://www.amazon.in/")
@@ -23,7 +25,7 @@ def setup(request):
     request.cls.driver = driver  # this line will add driver reference in other classes
 
     before_failed = request.session.testsfailed
-    yield
+    yield driver
     if request.session.testsfailed != before_failed:
         allure.attach(driver.get_screenshot_as_png(), name=request.node.name, attachment_type=AttachmentType.PNG)
         request.session.testsfailed = before_failed  # Reset the testsfailed count
