@@ -2,6 +2,7 @@ import allure
 from allure_commons.types import AttachmentType
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 import pytest
 from tests.base import Base
 
@@ -12,7 +13,7 @@ def setup(request):
 
     options = webdriver.ChromeOptions()
     options.add_experimental_option("detach", True)
-    s = Service("/home/shubham/Shubham_QA/Projects/caseStudy/chromedriver")
+    s = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(options=options, service=s)
     driver.implicitly_wait(10)
     # driver.get("https://www.amazon.in/")

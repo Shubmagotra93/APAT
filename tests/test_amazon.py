@@ -1,3 +1,4 @@
+import allure
 import pytest
 from pageObjects.landing_page import LandingPage
 from tests.base import Base
@@ -6,6 +7,7 @@ from tests.base import Base
 class Test_Amazon_Site(Base):
     config = Base.config_data()
 
+    @allure.feature("Amazon Product Search")
     @pytest.mark.admin
     def test_amazon_workflow(self):
         lp = LandingPage(self.driver)

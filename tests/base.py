@@ -1,3 +1,5 @@
+import os
+
 import pytest
 import json
 
@@ -9,14 +11,15 @@ class Base:
     @staticmethod
     def config_data():
         try:
-            # file_path = os.path.join(os.getcwd(), "testdata.json")
-            with open("/home/shubham/Shubham_QA/Projects/caseStudy/testdata.json", 'r') as file:
-                return json.load(file)
+            # Dynamically construct the file path
+            file_path = os.path.join(os.getcwd(), "testdata.json")
+            print("current directory",os.getcwd())
+            print(file_path)
+            with open(file_path, 'r') as file:
+                    return json.load(file)
         except FileNotFoundError as e:
             print(f"Configuration file not found: \n{e}")
             return {}
 
 
-
-
-
+# /home/shubham/Shubham_QA/Projects/caseStudy/testdata.json
