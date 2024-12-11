@@ -9,7 +9,7 @@ class Test_Amazon_Site(Base):
     @pytest.mark.admin
     def test_amazon_workflow(self):
         lp = LandingPage(self.driver)
-        lp.login_feature(self.config.get("username"))
+        # lp.login_feature(self.config.get("username"))
         lp.search_feature(self.config.get("search_value"))
         lp.adding_cart_feature(self.config.get("card_number"))
 

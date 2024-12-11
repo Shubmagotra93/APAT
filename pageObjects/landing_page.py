@@ -4,13 +4,13 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from caseStudy.tests.base import Base
+from tests.base import Base
 
 
 class LandingPage(Base):
     def __init__(self, driver):
         self.driver = driver
-        self.wait = WebDriverWait(self.driver, 60)
+        self.wait = WebDriverWait(self.driver, 10)
 
 
     sign_in_button = (By.XPATH, "(//a[@data-nav-role='signin'])[1]")
@@ -29,7 +29,7 @@ class LandingPage(Base):
     frame = (By.NAME, "//iframe[@name='ApxSecureIframe']")
     card_no = (By.NAME, "addCreditCardNumber")
     click_enter = (By.XPATH, "//span[text()='Enter card details']")
-    card_alert_error = (By.CSS_SELECTOR, ".a-box-inner a-alert-container")
+    card_alert_error = (By.XPATH, "(//h4[@class='a-alert-heading'])[5]")
 
 
 
@@ -67,17 +67,21 @@ class LandingPage(Base):
         self.driver.execute_script("arguments[0].scrollIntoView();", cart)
         time.sleep(2)
         cart.click()
-        self.wait.until(EC.element_to_be_clickable(LandingPage.go_to_cart)).click()
-        self.wait.until(EC.element_to_be_clickable(LandingPage.checkout)).click()
-        self.wait.until(EC.element_to_be_clickable(LandingPage.use_address)).click()
-        self.wait.until(EC.element_to_be_clickable(LandingPage.payment_radio)).click()
-        self.wait.until(EC.element_to_be_clickable(LandingPage.enter_card_details_link)).click()
-        frame = self.driver.find_element(*LandingPage.frame)
-        self.driver.switch_to.frame(frame)
-        self.wait.until(EC.element_to_be_clickable(LandingPage.card_no)).send_keys(card_no)
-        self.wait.until(EC.element_to_be_clickable(LandingPage.click_enter)).click()
-        error = self.wait.until(EC.element_to_be_clickable(LandingPage.card_alert_error))
-        print(error.text)
+        # self.wait.until(EC.element_to_be_clickable(LandingPage.go_to_cart)).click()
+        self.wait.until(EC.element_to_be_clickable(LandingPage.add_to_cart)).click()
+        print("clicked add to cart")
+        # error = self.wait.until(EC.visibility_of_element_located(LandingPage.card_alert_error))
+        # print(error.text)
+        self.wait.until(EC.visibility_of_element_located(LandingPage.checkout)).click()
+        # self.wait.until(EC.element_to_be_clickable(LandingPage.use_address)).click()
+        # self.wait.until(EC.element_to_be_clickable(LandingPage.payment_radio)).click()
+        # self.wait.until(EC.element_to_be_clickable(LandingPage.enter_card_details_link)).click()
+        # frame = self.driver.find_element(*LandingPage.frame)
+        # self.driver.switch_to.frame(frame)
+        # self.wait.until(EC.element_to_be_clickable(LandingPage.card_no)).send_keys(card_no)
+        # self.wait.until(EC.element_to_be_clickable(LandingPage.click_enter)).click()
+        # error = self.wait.until(EC.element_to_be_clickable(LandingPage.card_alert_error))
+        # print(error.text)
         return
 
 

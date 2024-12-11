@@ -1,5 +1,3 @@
-import os
-
 import pytest
 import json
 
@@ -12,10 +10,10 @@ class Base:
     def config_data():
         try:
             # file_path = os.path.join(os.getcwd(), "testdata.json")
-            with open("/home/shubham/PycharmProjects/caseStudy/testdata.json", 'r') as file:
+            with open("/home/shubham/Shubham_QA/Projects/caseStudy/testdata.json", 'r') as file:
                 return json.load(file)
         except FileNotFoundError as e:
-            print(f"Configuration file not found: {e}")
+            print(f"Configuration file not found: \n{e}")
             return {}
 
 
