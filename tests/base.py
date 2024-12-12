@@ -13,13 +13,8 @@ class Base:
         try:
             # Dynamically construct the file path
             file_path = os.path.join(os.getcwd(), "testdata.json")
-            print("current directory",os.getcwd())
-            print(file_path)
             with open(file_path, 'r') as file:
                     return json.load(file)
         except FileNotFoundError as e:
             print(f"Configuration file not found: \n{e}")
             return {}
-
-
-# /home/shubham/Shubham_QA/Projects/caseStudy/testdata.json
